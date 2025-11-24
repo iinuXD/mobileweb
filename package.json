@@ -9,5 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.23.0"
+  "packageManager": "pnpm@10.23.0",
+  "dependencies": {
+    "@capacitor/app": "7.1.0",
+    "@capacitor/cli": "7.4.4",
+    "@capacitor/core": "7.4.4",
+    "@capacitor/haptics": "7.0.2",
+    "@capacitor/keyboard": "7.0.3",
+    "@capacitor/status-bar": "7.0.3"
+  }
 }
