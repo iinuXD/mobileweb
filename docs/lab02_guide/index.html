@@ -1,18 +1,232 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>โครงสรา้งพนฐานของ Ѹื HTML5</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KKU Campus Guide - แนะนำสถานที่ มข.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. General Setup & Variables --- */
+        :root {
+            --primary-color: #A73B24; /* สีอิฐ/แสด มข. */
+            --secondary-color: #F3F4F6;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            box-sizing: border-box; /* Box Model Reset */
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- 2. Header & Navigation (Semantic) --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .student-info {
+            font-size: 1.1rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            margin-top: 10px;
+        }
+
+        /* --- 3. Main Content Layout --- */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid Container สำหรับการ์ดสถานที่ */
+        .places-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Default Mobile: 1 คอลัมน์ */
+            gap: 2rem;
+        }
+
+        /* --- 4. Location Card (Article) --- */
+        article.location-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        article.location-card:hover {
+            transform: translateY(-5px); /* Animation เล็กน้อยเมื่อเอาเมาส์ชี้ */
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .card-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        /* --- 5. Image Gallery within Card --- */
+        .image-gallery {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .image-gallery img {
+            width: 50%; /* แบ่งกันคนละครึ่ง */
+            height: 200px;
+            object-fit: cover; /* ตัดภาพให้พอดีกรอบโดยไม่เสียสัดส่วน */
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* --- 6. Footer --- */
+        footer {
+            background-color: #2d2d2d;
+            color: #ccc;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* --- 7. Media Queries (Responsive Design) --- */
+        
+        /* Tablet Landscape และ Desktop ทั่วไป */
+        @media (min-width: 768px) {
+            .places-grid {
+                grid-template-columns: repeat(2, 1fr); /* เปลี่ยนเป็น 2 คอลัมน์ */
+            }
+        }
+
+        /* หน้าจอเล็กมาก (Mobile) ปรับแต่งเพิ่มเติม */
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .image-gallery {
+                flex-direction: column; /* เรียงรูปแนวตั้งแทนแนวนอนบนมือถือ */
+            }
+            
+            .image-gallery img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>สวนหั ่ วของหน้าเว็บ</header>
-<main>
-<article>
-<h1>ยินดีต้อนรับสูเว็ ่ บไซต์</h1>
-<p>ตัวอย่างเนืѸอหาในโครงสรา้ง HTML5</p>
-</article>
-</main>
-<footer>ลิขสทธิ ิ ѻ© 2025 โดย My Website</footer>
+
+    <header>
+        <h1>KKU Campus Guide</h1>
+        <p>แนะนำสถานที่น่าสนใจในมหาวิทยาลัยขอนแก่น</p>
+        
+        <div class="student-info">
+            รหัส: 6XXXXXXXX-X | ชื่อ: นาย/นางสาว ใจดี เรียนเก่ง
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <h2>ยินดีต้อนรับสู่รั้วมอดินแดง</h2>
+            <p>มหาวิทยาลัยขอนแก่นมีพื้นที่กว้างขวางและมีสถานที่สวยงามมากมาย 
+            นี่คือ 4 สถานที่แนะนำที่คุณไม่ควรพลาด ไม่ว่าจะมาเรียนหรือมาพักผ่อน</p>
+        </section>
+
+        <section class="places-grid">
+            <article class="location-card">
+                <div class="card-content">
+                    <h2>1. ศาลเจ้าพ่อมอดินแดง</h2>
+                    <p>สถานที่ศักดิ์สิทธิ์อันเป็นที่เคารพสักการะของชาว มข. เป็นศูนย์รวมจิตใจของนักศึกษาและบุคลากร ตั้งอยู่บริเวณประตูทางเข้าฝั่งมิตรภาพ บรรยากาศร่มรื่นและเต็มไปด้วยศรัทธา</p>
+                    <div class="image-gallery">
+                        <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&w=600&q=80" alt="ศาลเจ้าพ่อมอดินแดง 1">
+                        <img src="https://images.unsplash.com/photo-1519114056088-b877fe073a52?auto=format&fit=crop&w=600&q=80" alt="ศาลเจ้าพ่อมอดินแดง 2">
+                    </div>
+                </div>
+            </article>
+
+            <article class="location-card">
+                <div class="card-content">
+                    <h2>2. อาคารสิริคุณากร (ตึกอธิการบดี)</h2>
+                    <p>หรือที่เรียกกันว่า "ตึกขาว" เป็นอาคารศูนย์กลางการบริหารงานของมหาวิทยาลัย มีสถาปัตยกรรมที่โดดเด่น สวยงาม และเป็นแลนด์มาร์คสำคัญในการถ่ายภาพรับปริญญา</p>
+                    <div class="image-gallery">
+                        <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80" alt="ตึกอธิการ 1">
+                        <img src="https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?auto=format&fit=crop&w=600&q=80" alt="ตึกอธิการ 2">
+                    </div>
+                </div>
+            </article>
+
+            <article class="location-card">
+                <div class="card-content">
+                    <h2>3. บึงสีฐาน</h2>
+                    <p>สถานที่พักผ่อนหย่อนใจยอดฮิต ทั้งฝั่งตะวันออกและตะวันตก เหมาะแก่การมาวิ่งออกกำลังกายตอนเย็น นั่งปิกนิก หรือชมพระอาทิตย์ตกดิน และเป็นสถานที่จัดงานลอยกระทงประจำปี</p>
+                    <div class="image-gallery">
+                        <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="บึงสีฐาน 1">
+                        <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=600&q=80" alt="บึงสีฐาน 2">
+                    </div>
+                </div>
+            </article>
+
+            <article class="location-card">
+                <div class="card-content">
+                    <h2>4. หอสมุดกลาง (KKU Library)</h2>
+                    <p>แหล่งเรียนรู้ที่ทันสมัย มีพื้นที่ Co-working space ให้นั่งทำงาน อ่านหนังสือ 24 ชั่วโมงในช่วงสอบ พร้อมสิ่งอำนวยความสะดวกครบครัน ดีไซน์ภายในสวยงามน่านั่ง</p>
+                    <div class="image-gallery">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80" alt="หอสมุดกลาง 1">
+                        <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80" alt="หอสมุดกลาง 2">
+                    </div>
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 KKU Campus Guide Project. All rights reserved.</p>
+        <p>พัฒนาโดย: [ชื่อ-สกุล ของคุณ]</p>
+    </footer>
+
 </body>
 </html>
