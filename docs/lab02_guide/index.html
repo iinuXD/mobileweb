@@ -6,20 +6,22 @@
     <title>KKU Campus Guide - แนะนำสถานที่ มข.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- 1. General Setup & Variables --- */
         :root {
             --primary-color: #A73B24; /* สีอิฐ/แสด มข. */
+            --primary-dark: #8a2e1a;
             --secondary-color: #F3F4F6;
+            --accent-yellow: #FFD700;
             --text-color: #333;
             --white: #ffffff;
             --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
         * {
-            box-sizing: border-box; /* Box Model Reset */
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
@@ -31,63 +33,75 @@
             line-height: 1.6;
         }
 
-        /* --- 2. Header & Navigation (Semantic) --- */
+        /* --- 2. Header & Navigation --- */
         header {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             color: var(--white);
             padding: 2rem 1rem;
             text-align: center;
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #canvasLogo {
+            display: block;
+            margin: 0 auto 1rem auto;
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.3));
         }
 
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
 
         .student-info {
             font-size: 1.1rem;
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
             display: inline-block;
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            margin-top: 10px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         /* --- 3. Main Content Layout --- */
         main {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
         }
 
         .intro {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Grid Container สำหรับการ์ดสถานที่ */
         .places-grid {
             display: grid;
-            grid-template-columns: 1fr; /* Default Mobile: 1 คอลัมน์ */
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem; /* เว้นระยะห่างจาก Form */
         }
 
-        /* --- 4. Location Card (Article) --- */
+        /* --- 4. Location Card --- */
         article.location-card {
             background: var(--white);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s ease;
-            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         article.location-card:hover {
-            transform: translateY(-5px); /* Animation เล็กน้อยเมื่อเอาเมาส์ชี้ */
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
         }
 
         .card-content {
@@ -96,63 +110,118 @@
 
         .card-content h2 {
             color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary-color);
-            display: inline-block;
-            padding-bottom: 5px;
+            margin-bottom: 0.75rem;
         }
 
-        .card-content p {
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        /* --- 5. Image Gallery within Card --- */
         .image-gallery {
             display: flex;
             gap: 10px;
-            margin-top: 1rem;
         }
 
         .image-gallery img {
-            width: 50%; /* แบ่งกันคนละครึ่ง */
+            width: 50%;
             height: 200px;
-            object-fit: cover; /* ตัดภาพให้พอดีกรอบโดยไม่เสียสัดส่วน */
+            object-fit: cover;
             border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* --- 5. Suggestion Form Styles (NEW) --- */
+        .form-section {
+            background-color: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 auto; /* จัดกึ่งกลางหน้าจอ */
+        }
+
+        .form-section h3 {
+            color: var(--primary-dark);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
             border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Prompt', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(167, 59, 36, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
         }
 
         /* --- 6. Footer --- */
         footer {
             background-color: #2d2d2d;
-            color: #ccc;
+            color: #9ca3af;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            padding: 3rem 1rem;
+            margin-top: 4rem;
         }
 
-        /* --- 7. Media Queries (Responsive Design) --- */
-        
-        /* Tablet Landscape และ Desktop ทั่วไป */
+        /* --- 7. Media Queries --- */
         @media (min-width: 768px) {
             .places-grid {
-                grid-template-columns: repeat(2, 1fr); /* เปลี่ยนเป็น 2 คอลัมน์ */
+                grid-template-columns: repeat(2, 1fr);
+            }
+            header h1 {
+                font-size: 3rem;
             }
         }
 
-        /* หน้าจอเล็กมาก (Mobile) ปรับแต่งเพิ่มเติม */
         @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-            
             .image-gallery {
-                flex-direction: column; /* เรียงรูปแนวตั้งแทนแนวนอนบนมือถือ */
+                flex-direction: column;
             }
-            
             .image-gallery img {
                 width: 100%;
                 height: auto;
+            }
+            .form-section {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -160,11 +229,12 @@
 <body>
 
     <header>
+        <canvas id="canvasLogo" width="320" height="100"></canvas>
         <h1>KKU Campus Guide</h1>
         <p>แนะนำสถานที่น่าสนใจในมหาวิทยาลัยขอนแก่น</p>
         
         <div class="student-info">
-            รหัส: 6XXXXXXXX-X | ชื่อ: นาย/นางสาว ใจดี เรียนเก่ง
+            รหัส: 663380201-3 | ชื่อ: นายกิตติพัฒน์ ราชศรีเมือง
         </div>
     </header>
 
@@ -172,25 +242,25 @@
         <section class="intro">
             <h2>ยินดีต้อนรับสู่รั้วมอดินแดง</h2>
             <p>มหาวิทยาลัยขอนแก่นมีพื้นที่กว้างขวางและมีสถานที่สวยงามมากมาย 
-            นี่คือ 4 สถานที่แนะนำที่คุณไม่ควรพลาด ไม่ว่าจะมาเรียนหรือมาพักผ่อน</p>
+            นี่คือ 4 สถานที่แนะนำที่คุณไม่ควรพลาด</p>
         </section>
 
         <section class="places-grid">
             <article class="location-card">
                 <div class="card-content">
                     <h2>1. ศาลเจ้าพ่อมอดินแดง</h2>
-                    <p>สถานที่ศักดิ์สิทธิ์อันเป็นที่เคารพสักการะของชาว มข. เป็นศูนย์รวมจิตใจของนักศึกษาและบุคลากร ตั้งอยู่บริเวณประตูทางเข้าฝั่งมิตรภาพ บรรยากาศร่มรื่นและเต็มไปด้วยศรัทธา</p>
+                    <p>สถานที่ศักดิ์สิทธิ์อันเป็นที่เคารพสักการะของชาว มข. เป็นศูนย์รวมจิตใจของนักศึกษาและบุคลากร</p>
                     <div class="image-gallery">
-                        <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&w=600&q=80" alt="ศาลเจ้าพ่อมอดินแดง 1">
-                        <img src="https://images.unsplash.com/photo-1519114056088-b877fe073a52?auto=format&fit=crop&w=600&q=80" alt="ศาลเจ้าพ่อมอดินแดง 2">
+                        <img src="https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&w=600&q=80" alt="ศาลเจ้าพ่อ 1">
+                        <img src="https://images.unsplash.com/photo-1519114056088-b877fe073a52?auto=format&fit=crop&w=600&q=80" alt="ศาลเจ้าพ่อ 2">
                     </div>
                 </div>
             </article>
 
             <article class="location-card">
                 <div class="card-content">
-                    <h2>2. อาคารสิริคุณากร (ตึกอธิการบดี)</h2>
-                    <p>หรือที่เรียกกันว่า "ตึกขาว" เป็นอาคารศูนย์กลางการบริหารงานของมหาวิทยาลัย มีสถาปัตยกรรมที่โดดเด่น สวยงาม และเป็นแลนด์มาร์คสำคัญในการถ่ายภาพรับปริญญา</p>
+                    <h2>2. อาคารสิริคุณากร</h2>
+                    <p>ตึกอธิการบดี หรือ "ตึกขาว" ศูนย์กลางการบริหารงานและแลนด์มาร์คสำคัญในการถ่ายภาพ</p>
                     <div class="image-gallery">
                         <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=600&q=80" alt="ตึกอธิการ 1">
                         <img src="https://images.unsplash.com/photo-1492538368677-f6e0afe31dcc?auto=format&fit=crop&w=600&q=80" alt="ตึกอธิการ 2">
@@ -201,7 +271,7 @@
             <article class="location-card">
                 <div class="card-content">
                     <h2>3. บึงสีฐาน</h2>
-                    <p>สถานที่พักผ่อนหย่อนใจยอดฮิต ทั้งฝั่งตะวันออกและตะวันตก เหมาะแก่การมาวิ่งออกกำลังกายตอนเย็น นั่งปิกนิก หรือชมพระอาทิตย์ตกดิน และเป็นสถานที่จัดงานลอยกระทงประจำปี</p>
+                    <p>สถานที่พักผ่อนหย่อนใจยอดฮิต เหมาะแก่การวิ่งออกกำลังกายและชมพระอาทิตย์ตกดิน</p>
                     <div class="image-gallery">
                         <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=600&q=80" alt="บึงสีฐาน 1">
                         <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=600&q=80" alt="บึงสีฐาน 2">
@@ -211,22 +281,104 @@
 
             <article class="location-card">
                 <div class="card-content">
-                    <h2>4. หอสมุดกลาง (KKU Library)</h2>
-                    <p>แหล่งเรียนรู้ที่ทันสมัย มีพื้นที่ Co-working space ให้นั่งทำงาน อ่านหนังสือ 24 ชั่วโมงในช่วงสอบ พร้อมสิ่งอำนวยความสะดวกครบครัน ดีไซน์ภายในสวยงามน่านั่ง</p>
+                    <h2>4. หอสมุดกลาง</h2>
+                    <p>แหล่งเรียนรู้ที่ทันสมัย Co-working space 24 ชม. ดีไซน์สวยงาม</p>
                     <div class="image-gallery">
-                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80" alt="หอสมุดกลาง 1">
-                        <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80" alt="หอสมุดกลาง 2">
+                        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=600&q=80" alt="หอสมุด 1">
+                        <img src="https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&w=600&q=80" alt="หอสมุด 2">
                     </div>
                 </div>
             </article>
-
         </section>
+
+        <section class="form-section">
+            <h3>แนะนำสถานที่เพิ่มเติม</h3>
+            <form action="https://api.web3forms.com/submit" method="POST">
+                
+                <input type="hidden" name="access_key" value="27539ad9-af85-4a8f-ace5-ca72686d7f51">
+                <input type="hidden" name="subject" value="New KKU Place Recommendation">
+
+                <div class="form-group">
+                    <label for="placeName">ชื่อสถานที่</label>
+                    <input type="text" id="placeName" name="ชื่อสถานที่" placeholder="เช่น อุทยานวิทยาศาสตร์..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="imgUrl">URL ของภาพประกอบ</label>
+                    <input type="url" id="imgUrl" name="URL_รูปภาพ" placeholder="https://..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="details">รายละเอียด</label>
+                    <textarea id="details" name="รายละเอียด" rows="4" placeholder="บอกเล่าความน่าสนใจของสถานที่นี้..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">ส่งข้อมูลแนะนำ</button>
+            </form>
+        </section>
+
     </main>
 
     <footer>
         <p>&copy; 2024 KKU Campus Guide Project. All rights reserved.</p>
-        <p>พัฒนาโดย: [ชื่อ-สกุล ของคุณ]</p>
+        <p>พัฒนาโดย: กิตติพํฒน์ ราชศรีเมือง</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('canvasLogo');
+            const ctx = canvas.getContext('2d');
+            const connectColor = 'rgba(255, 255, 255, 0.3)';
+            const nodeColor = '#FFD700';
+
+            const nodes = [
+                {x: 60, y: 50, baseR: 6},
+                {x: 140, y: 30, baseR: 8},
+                {x: 180, y: 70, baseR: 7},
+                {x: 260, y: 40, baseR: 6}
+            ];
+            
+            let time = 0;
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                time += 0.04;
+
+                ctx.beginPath();
+                ctx.moveTo(nodes[0].x, nodes[0].y);
+                for (let i = 1; i < nodes.length; i++) {
+                     ctx.lineTo(nodes[i].x, nodes[i].y);
+                }
+                ctx.lineTo(nodes[1].x, nodes[1].y); 
+
+                ctx.strokeStyle = connectColor;
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round'; 
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+
+                nodes.forEach((node, index) => {
+                    const pulse = Math.sin(time + index * 1.5) * 3; 
+                    const currentR = node.baseR + pulse + 1; 
+
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, currentR, 0, Math.PI * 2);
+                    ctx.fillStyle = nodeColor;
+                    ctx.shadowBlur = 20;
+                    ctx.shadowColor = nodeColor;
+                    ctx.fill();
+                    ctx.shadowBlur = 0; 
+                });
+
+                ctx.font = 'bold 14px Prompt, sans-serif';
+                ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                ctx.textAlign = 'center';
+                ctx.fillText('CONNECT POINTS', canvas.width / 2, canvas.height - 10);
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        });
+    </script>
 </body>
 </html>
