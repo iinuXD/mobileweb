@@ -217,6 +217,10 @@
             header h1 {
                 font-size: 3rem;
             }
+            #canvasLogo {
+                width: 320px;
+                height: 100px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -237,6 +241,10 @@
             }
             .form-group label {
                 font-size: 0.95rem;
+            }
+            #canvasLogo {
+                width: 280px;
+                height: 90px;
             }
         }
 
@@ -287,6 +295,10 @@
             }
             .form-section {
                 padding: 1.5rem;
+            }
+            #canvasLogo {
+                width: 240px;
+                height: 75px;
             }
         }
     </style>
@@ -408,28 +420,49 @@
 
             const colorArray = [colors.red, colors.green, colors.blue, colors.yellow, colors.purple];
 
-            // KKU Logo nodes (forming a circular logo)
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const nodes = [];
-            
-            for (let i = 0; i < 5; i++) {
-                const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
-                nodes.push({
-                    x: centerX + 40 * Math.cos(angle),
-                    y: centerY + 40 * Math.sin(angle),
-                    color: colorArray[i],
-                    baseR: 8
-                });
+            // Function to get responsive values
+            function getResponsiveValues() {
+                const width = canvas.offsetWidth;
+                const height = canvas.offsetHeight;
+                const scale = Math.min(width, height) / 100; // Base scale on smaller dimension
+                
+                return {
+                    centerX: width / 2,
+                    centerY: height / 2,
+                    radius: 30 * scale,
+                    nodeSize: 6 * scale,
+                    fontSize: Math.max(12, 14 * scale) + 'px',
+                    lineWidth: 2
+                };
             }
 
             // Hover detection
             canvas.addEventListener('mouseenter', () => { isHovering = true; });
             canvas.addEventListener('mouseleave', () => { isHovering = false; });
 
+            // Redraw on window resize
+            window.addEventListener('resize', () => {
+                // Canvas will automatically scale with CSS
+            });
+
             function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 time += 0.04;
+
+                const responsive = getResponsiveValues();
+                const { centerX, centerY, radius, nodeSize } = responsive;
+
+                // Create nodes based on responsive values
+                const nodes = [];
+                for (let i = 0; i < 5; i++) {
+                    const angle = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+                    nodes.push({
+                        x: centerX + radius * Math.cos(angle),
+                        y: centerY + radius * Math.sin(angle),
+                        color: colorArray[i],
+                        baseR: nodeSize
+                    });
+                }
 
                 // Draw connecting lines
                 ctx.beginPath();
@@ -443,14 +476,14 @@
                 ctx.closePath();
 
                 ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-                ctx.lineWidth = 2;
+                ctx.lineWidth = responsive.lineWidth;
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
                 ctx.stroke();
 
                 // Draw center circle
-                const centerPulse = Math.sin(time) * 3;
-                const centerRadius = 15 + centerPulse;
+                const centerPulse = Math.sin(time) * 2 * (nodeSize / 6);
+                const centerRadius = nodeSize * 2 + centerPulse;
                 
                 const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, centerRadius);
                 gradient.addColorStop(0, colors.red);
@@ -467,8 +500,8 @@
 
                 // Draw RGB nodes
                 nodes.forEach((node, index) => {
-                    const pulse = Math.sin(time + index * 1.2) * 4;
-                    const currentR = node.baseR + pulse + (isHovering ? 3 : 0);
+                    const pulse = Math.sin(time + index * 1.2) * 3 * (nodeSize / 6);
+                    const currentR = node.baseR + pulse + (isHovering ? nodeSize * 0.5 : 0);
 
                     ctx.beginPath();
                     ctx.arc(node.x, node.y, currentR, 0, Math.PI * 2);
@@ -480,7 +513,7 @@
                 });
 
                 // Draw KKU text
-                ctx.font = 'bold 18px Prompt, sans-serif';
+                ctx.font = 'bold ' + responsive.fontSize + ' Prompt, sans-serif';
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
