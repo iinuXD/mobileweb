@@ -3,7 +3,7 @@
     <ion-header>
       <ion-toolbar>
         <ion-title>Photo Gallery</ion-title>
-        <p>Hello Ionic Vue</p>
+        <p>กิตติพัฒน์ ราชศรีเมือง 663380201-3</p>
       </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
