@@ -7,11 +7,12 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/mobileweb/lab06-expense-vue/',
+  base: '/mobileweb/lab06_Photo_vue/',
   plugins: [
     vue(),
     legacy()
   ],
+
   build: {
     outDir: path.resolve(__dirname, '../../docs/lab06-expense-vue'),
     emptyOutDir: true
