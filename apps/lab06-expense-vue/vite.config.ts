@@ -12,13 +12,14 @@ export default defineConfig({
     vue(),
     legacy()
   ],
+  build: {
+    outDir: path.resolve(__dirname, '../../docs/lab06-expense-vue'),
+    emptyOutDir: true
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
-  },
-  build: {
-    outDir: '../../docs/lab06-expense-vue',
   },
   test: {
     globals: true,
