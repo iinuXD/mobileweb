@@ -7,7 +7,7 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/mobileweb/docs/lab06-expense-vue/',
+  base: './',
   plugins: [
     vue(),
     legacy()
