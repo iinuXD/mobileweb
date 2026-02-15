@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "291967822295",
+    "project_id": "mobileweb-17ab3",
+    "storage_bucket": "mobileweb-17ab3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291967822295:android:aa7892f2688defeaaec392",
+        "android_client_info": {
+          "package_name": "cpkku.kittiphat.lab07"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs0aqj0oVaNE6xPQ45s0UTIR6Su--XQmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
