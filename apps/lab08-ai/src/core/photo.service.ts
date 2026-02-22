@@ -24,14 +24,18 @@ export class PhotoService {
 
   // 2) ถ่ายภาพ/เลือกจากแกลเลอรี (Capacitor)
   static async fromCamera(): Promise<Base64Image> {
-    const photo = await Camera.getPhoto({
-      source: CameraSource.Prompt,
-      resultType: CameraResultType.Base64,
-      quality: 85,
-    });
+    try {
+      const photo = await Camera.getPhoto({
+        source: CameraSource.Prompt,
+        resultType: CameraResultType.Base64,
+        quality: 85,
+      });
 
-
-    if (!photo.base64String) throw new Error("No base64 from camera");
-    return { base64: photo.base64String, mimeType: photo.format ? `image/${photo.format}` : "image/jpeg" };
+      if (!photo.base64String) throw new Error("No base64 from camera");
+      return { base64: photo.base64String, mimeType: photo.format ? `image/${photo.format}` : "image/jpeg" };
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      throw new Error(`Camera not available: ${message}. Please use file upload instead or run on a mobile device.`);
+    }
   }
 }
